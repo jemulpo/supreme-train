@@ -3,92 +3,103 @@ html<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blog.jemulpo.eth</title>
+    <title>jemulpo.eth</title>
     <style>
         html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #fafafa;
-            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            margin: 0; padding: 0; width: 100%; height: 100vh; overflow: hidden;
+            background-color: #fafafa; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-        .blog-box {
-            background: #ffffff;
-            padding: 35px 40px;
-            max-width: 650px;
-            width: 90%;
-            height: 82vh;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border: 1px solid #eaeaea;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
+        .八陽寺 {
+            background: #ffffff; padding: 35px 40px; max-width: 650px; width: 90%; height: 82vh;
+            border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #eaeaea;
+            display: flex; flex-direction: column; box-sizing: border-box;
         }
-        .tag { display: inline-block; background: #e0f2fe; color: #0369a1; font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; align-self: flex-start; flex-shrink: 0; }
-        h1 { font-size: 28px; font-weight: 700; margin: 0 0 12px 0; line-height: 1.3; color: #2563eb; flex-shrink: 0; }
-        .date { font-size: 14px; color: #888; margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; flex-shrink: 0; }
-        .scroll-area {
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-            padding-right: 10px;
+        .nav-bar { display: none; margin-bottom: 12px; flex-shrink: 0; }
+        .back-btn {
+            text-decoration: none; color: #6b7280; font-size: 14px; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
         }
-        .text-content { 
-            font-size: 16px; 
-            line-height: 1.9; 
-            color: #333333; 
-            text-align: justify; 
-            white-space: pre-wrap; 
-        }
-        .footer { 
-            margin-top: 25px; 
-            text-align: center; 
-            font-size: 14px; 
-            color: #9ca3af; 
-            font-weight: 500; 
-            flex-shrink: 0;
-        }
+        .back-btn:hover { color: #2563eb; }
+        .title-section { flex-shrink: 0; text-align: center; }
+        h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px 0; color: #2563eb; }
+        .sub-title { font-size: 14px; color: #888; margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }
+        .scroll-area { flex: 1; min-height: 0; overflow-y: auto; padding-right: 8px; }
+        .scroll-area::-webkit-scrollbar { width: 5px; }
+        .scroll-area::-webkit-scrollbar-track { background: transparent; }
+        .scroll-area::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+        .post-list { list-style: none; padding: 0; margin: 0; }
+        .post-item { border-bottom: 1px solid #f9fafb; padding: 20px 0; display: flex; flex-direction: column; gap: 6px; }
+        .post-item .post-link { text-decoration: none; color: #222222; font-size: 18px; font-weight: 600; cursor: pointer; transition: color 0.2s; }
+        .post-item .post-link:hover { color: #2563eb; }
+        .post-item .post-date { font-size: 13px; color: #9ca3af; }
+        .post-content-view { display: none; }
+        .tag { display: inline-block; background: #e0f2fe; color: #0369a1; font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+        .content-date { font-size: 14px; color: #888; margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }
+        .text-content { font-size: 16px; line-height: 1.9; color: #222222; text-align: left; white-space: pre-wrap; }
+        .footer { margin-top: 25px; text-align: center; font-size: 14px; color: #9ca3af; font-weight: 500; flex-shrink: 0; }
+        @media (max-width: 480px) { .八陽寺 { padding: 25px 20px; height: 85vh; } h1 { font-size: 22px; } .text-content { font-size: 15px; } }
     </style>
 </head>
 <body>
 
-<div class="blog-box">
-    <!-- 태그 -->
-    <div class="tag">팔양경</div>
+<div class="八陽寺">
+    <div class="nav-bar" id="navBar">
+        <a class="back-btn" onclick="showList()">← 목록으로</a>
+    </div>
 
-    <!-- 제목 -->
-    <h1>佛說天地八陽神呪經 解釋</h1>
+    <!-- 1. 글 목록 화면 -->
+    <div id="listView">
+        <div class="title-section">
+            <h1>jemulpo.eth</h1>
+            <div class="sub-title">by 八陽寺 주지, 무측지 법사</div>
+        </div>
+        <div class="scroll-area">
+            <ul class="post-list">
+                <li class="post-item">
+                    <a class="post-link" onclick="showPost('post-1')">佛說天地八陽神呪經 解釋</a>
+                    <span class="post-date">2026년 6월 20일</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-    <!-- 작성일 정보 -->
-    <div class="date">작성일: 2026년 6월 18일 · by 八陽寺 주지, 무측지 법사</div>
-
-    <!-- 📜 본문 스크롤 영역 ('html' 글자를 완벽히 지웠습니다) -->
-    <div class="scroll-area">
-        <div class="text-content">팔양경에서 讀經이란?
-
+    <!-- 2. 글 본문 저장소 -->
+    <div class="scroll-area post-content-view" id="contentView">
+        <div id="post-1" class="post-body" style="display:none;">
+            <div class="tag">팔양경</div>
+            <h1>佛說天地八陽神呪經 解釋</h1>
+            <div class="content-date">작성일: 2026년 6월 20일 · by 八陽寺 주지, 무측지 법사</div>
+            <div class="text-content">팔양경에서 讀經이란?
 
 天地 및 中道의 법리를 적용하여 사실관계에 대해 인지하고 결의한 뒤, 실천하는 일련의 과정을 말한다.
 
-
 행여 모르는 내용이거나 감당하기 어려운 상황이라면, 선지식에게 도움을 청할 수 있다. 어떠한 경우라도, 자신은 당해 사안에 관해 정확히 인지하여야 하며, 得道하였거든 자비로써 타인에게 전파하여 善法을 쌓도록 한다.
-
 
 先讀此經三遍 所願成就 : 사전에 결과를 예견하여 원인을 파악하고 요건을 충족한다면, 소원을 성취할 수 있다.
 
-
 위 내용은 八陽敎 교주 月尾道士님과 팔양경연구회 회장이신 金昌德 보살님의 말씀을 참조하였다.</div>
+        </div>
     </div>
 </div>
 
-<!-- 하단 고정 문구 -->
 <div class="footer">jemulpo.eth</div>
 
+<script>
+    function showPost(postId) {
+        document.getElementById('listView').style.display = 'none';
+        document.getElementById('contentView').style.display = 'block';
+        document.getElementById('navBar').style.display = 'block';
+        const posts = document.getElementsByClassName('post-body');
+        for(let i=0; i<posts.length; i++) { posts[i].style.display = 'none'; }
+        document.getElementById(postId).style.display = 'block';
+        document.getElementById('contentView').scrollTop = 0;
+    }
+    function showList() {
+        document.getElementById('listView').style.display = 'block';
+        document.getElementById('contentView').style.display = 'none';
+        document.getElementById('navBar').style.display = 'none';
+    }
+</script>
 </body>
 </html>
